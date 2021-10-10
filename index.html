@@ -60,12 +60,9 @@
     <!-- loader -->
    
 
-<!-- <script type="text/javascript">
-DeBounce_APIKEY = 'public_WjNtdHY1b2thYU5IaVVDT1gwMmIwQT09';
-DeBounce_BlockFreeEmails = 'false'; //Set this value true to block free emails like Gmail.
-</script> -->
-<script>
 	
+<script>
+    (() => {
       const form = document.querySelector('form');
       const submitResponse = document.querySelector('#response');
       const formURL = 'https://xm5tlnr1x3.execute-api.ap-southeast-1.amazonaws.com/Prod/submitForm';  // ENTER YOUR API ENDPOINT HERE
@@ -75,7 +72,7 @@ DeBounce_BlockFreeEmails = 'false'; //Set this value true to block free emails l
 
         // Capture the form data
         let data = {};
-        Array.from(form).map(input => (data[input.name] = input.value));
+        Array.from(form).map(input => (data[input.id] = input.value));
         console.log('Sending: ', JSON.stringify(data));
 
         // Create the AJAX request
@@ -91,15 +88,17 @@ DeBounce_BlockFreeEmails = 'false'; //Set this value true to block free emails l
           if (response.target.status === 200) {
             form.reset();
             //submitResponse.innerHTML = 'Form submitted. Success!';
-            window.location.replace("/thank-you");
+	    window.location.replace("/thank-you");
           } else {
             submitResponse.innerHTML = 'Error! Please try again.';
             console.error(JSON.parse(response.target.response).message);
           }
         };    
-      };	
+      };
+    })();
+  </script>
 	
-</script>
+	
 	</body>
 
 </html>
