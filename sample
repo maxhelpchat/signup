@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+	</head>
+	<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
+
+    <!-- END nav -->
+
+    <section class="pb_cover_v3 overflow-hidden cover-bg-yellow cover-bg-opacity text-left pb_gradient_v1 pb_slant-light" id="section-home" style="text-align:center;">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-5 relative align-self-center go-top" id="getstarted">
+
+        <form action="" method="POST">
+              <h2 class="mb-4 mt-0 text-center">Sign Up for Free</h2>
+
+              <div class="jak-thankyou"></div>
+
+              <div class="form-show-hide">
+
+              <div class="form-group">
+                <input type="text" name="username" id="username" class="form-control pb_height-50 reverse" maxlength="100" placeholder="Username">
+                <span class="form-text text-muted username-help"></span>
+              </div>
+              <div class="form-group">
+                <input type="email" name="signup" id="signup" class="form-control pb_height-50 reverse" maxlength="100" placeholder="Email">
+                <span class="form-text text-muted signup-help"></span>
+              </div>
+              <div class="form-group">
+                <div class="pb_select-wrap">
+                  <select name="location" id="location" class="form-control pb_height-50 reverse">
+                    <option value="1" selected>Europe Server</option>
+                    <!-- <option value="2">Asia/Pacific</option>
+                    <option value="3">South America</option> -->
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input dsgvo" type="checkbox" value="1" name="dsgvo" id="dsgvo">
+                  <label class="form-check-label" for="dsgvo">
+                    Agree to terms and conditions
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-lg btn-block pb_btn-pill btn-shadow-blue" value="Register" style="background-color: blue;">
+              </div>
+
+            </div>
+            </form>
+
+          </div> 
+        </div>
+      </div>
+    </section>
+    <!-- loader -->
+   
+
+	
+<script>
+    (() => {
+      const form = document.querySelector('form');
+      const submitResponse = document.querySelector('#response');
+      const formURL = 'https://qb1fhtl1v4.execute-api.ap-southeast-1.amazonaws.com/Prod/submitForm';  // ENTER YOUR API ENDPOINT HERE
+
+      form.onsubmit = e => {
+        e.preventDefault();
+
+        // Capture the form data
+        let data = {};
+        Array.from(form).map(input => (data[input.id] = input.value));
+        console.log('Sending: ', JSON.stringify(data));
+
+        // Create the AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open(form.method, formURL, true);
+        xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+        // Send the collected data as JSON
+        xhr.send(JSON.stringify(data));
+
+        xhr.onloadend = response => {
+          if (response.target.status === 200) {
+            form.reset();
+            //submitResponse.innerHTML = 'Form submitted. Success!';
+	    window.location.replace("/thank-you");
+          } else {
+            submitResponse.innerHTML = 'Error! Please try again.';
+            console.error(JSON.parse(response.target.response).message);
+          }
+        };    
+      };
+    })();
+  </script>
+	
+	
+	</body>
+
+</html>
